@@ -1,0 +1,34 @@
+
+config:
+    name: "dd_test_login"
+    base_url: "http://dd-test.gcnao.cn"
+    verify: False
+
+teststeps:
+-
+    name: get captchaId
+    request:
+        method: GET
+        url: /gateway/account/captcha/image
+        params:
+            md: ${get_time()}
+            captchaType: "PERSON_LOGIN"
+    extract:
+        captchaId: content.result.id
+-
+    name: get token
+    variables:
+        text: {'username':'19812341111','password':'a123456','captcha':'1234','captchaId':$captchaId,'accountType':'PERSONAL','captchaType':'PERSON_LOGIN'}
+        encryptData: "${get_encrypt($text)}"
+    request:
+        method: POST
+        url: /gateway/account/loginV2
+        data:
+            data: $encryptData
+    extract:
+        token: content.result
+
+
+
+
+
