@@ -3,6 +3,7 @@ config:
     name: "dd_test_login"
     base_url: "http://dd-test.gcnao.cn"
     verify: False
+    export: ['token']
 
 teststeps:
 -
@@ -15,6 +16,8 @@ teststeps:
             captchaType: "PERSON_LOGIN"
     extract:
         captchaId: content.result.id
+    validate:
+        - eq: ["content.message","请求处理成功"]
 -
     name: get token
     variables:
@@ -27,6 +30,10 @@ teststeps:
             data: $encryptData
     extract:
         token: content.result
+    validate:
+        - eq: ["content.message","请求处理成功"]
+
+        
 
 
 
