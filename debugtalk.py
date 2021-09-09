@@ -28,6 +28,9 @@ def pad(text):
 
 
 def get_encrypt(text):
+    """
+    获取token时请求数据加密
+    """
     key = 'szewecszewecszew'
     aes = AES.new(key.encode('utf-8'),AES.MODE_ECB)
     res = aes.encrypt(pad(str(text)).encode("utf8"))

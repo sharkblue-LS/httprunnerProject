@@ -1,0 +1,41 @@
+config:
+    name: "档案管理"
+    base_url: "http://jspro-gateway-test.gcnao.cn"
+    verify: False
+
+teststeps:
+-
+    name: "获取token"
+    testcase: testcases/login.yml
+    export:
+      - token
+
+-   name: "档案管理-统计分析-项目收集统计"
+    request:
+        method: GET
+        url: /archives-service/statisticalAnalysis/getCollectStatisticalData
+        params:
+            projectId: 'bfc32d4547fb4e3bbd945a25dd1d64fe'
+            pageIndex: 1
+            pageSize: 10
+            collectType: 'project'
+        headers:
+            Authorization: $token
+    validate:
+        - eq: ["content.code",'200']
+        - eq: ['content.message','ok']
+
+-   name: "档案管理-统计分析-合同段收集统计"
+    request:
+        method: GET
+        url: /archives-service/statisticalAnalysis/getCollectStatisticalData
+        params:
+            projectId: 'bfc32d4547fb4e3bbd945a25dd1d64fe'
+            pageIndex: 1
+            pageSize: 10
+            collectType: 'contract'
+        headers:
+            Authorization: $token
+    validate:
+        - eq: ["content.code",'200']
+        - eq: ['content.message','ok']

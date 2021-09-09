@@ -1,13 +1,13 @@
 
 config:
-    name: "dd_test_login"
+    name: "登录"
     base_url: "http://dd-test.gcnao.cn"
     verify: False
     export: ['token']
 
 teststeps:
 -
-    name: get captchaId
+    name: "获取图片ID"
     request:
         method: GET
         url: /gateway/account/captcha/image
@@ -19,7 +19,7 @@ teststeps:
     validate:
         - eq: ["content.message","请求处理成功"]
 -
-    name: get token
+    name: "获取token"
     variables:
         text: {'username':'19812341111','password':'a123456','captcha':'1234','captchaId':$captchaId,'accountType':'PERSONAL','captchaType':'PERSON_LOGIN'}
         encryptData: "${get_encrypt($text)}"
