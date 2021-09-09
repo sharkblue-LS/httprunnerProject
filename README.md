@@ -9,7 +9,7 @@ cmd中输入命令：allure server path/allure_report
 ***
 #解决log中报句柄无效
 httprunner库中打开runner.py，在test_start下增加代码  
-```
+```python
  log_handler = logger.add(self.__log_path, level="DEBUG")
  
  # 句柄错误解决方法
